@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.machnetinc.ledger.porto";
+option java_outer_classname = "Journal";
+
+package journal;
+
+service JournalGrpcService {
+  rpc createJournal (TransactionRequest) returns (JournalResponse) {}
+  rpc getJournal(JournalId) returns (JournalResponse) {}
+}
+
+message JournalId {
+  string id = 1;
+}
+
+message TransactionRequest {
+  string transactionId = 1;
+  string userId = 2;
+  string associatedUser = 3;
+  string userFundingAccount = 4;
+  string associatedUserAccount = 5;
+  string senderCurrency = 6;
+  string recipientCurrency = 7;
+  double exchangeRate = 8;
+  double senderAmount = 9;
+  double totalSenderAmount = 10;
+  double feeAmount = 11;
+  double bonusAmount = 12;
+}
+
+message JournalResponse {
+  string id = 1;
+  string transferId = 2;
+  string referenceId = 3;
+  string type = 4;
+  string transferredCurrency = 5;
+  string transferredAmount = 6;
+  string reportingCurrency = 7;
+  string reportingAmount = 8;
+  string forexRate = 9;
+  string accountId = 10;
+  string status = 11;
+  optional string confirmedAt = 12;
+}
+

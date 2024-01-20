@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.machnetinc.ledger.porto";
+option java_outer_classname = "Node";
+
+package journal;
+
+service NodeGrpcService {
+  rpc createNode (NodeRequest) returns (NodeResponse) {}
+  rpc getNode (NodeId) returns (NodeResponse) {}
+}
+
+
+message NodeRequest {
+  string name = 1;
+  string accountId = 2;
+  NodeType type = 3;
+  string affiliate = 4;
+}
+
+enum NodeType {
+  PLATFORM = 0;
+  AFFILIATE = 1;
+  USER = 2;
+  PAYOUT = 3;
+}
+
+message NodeId{
+  string id = 1;
+}
+
+message NodeResponse {
+  string id = 1;
+  string name = 2;
+  string affiliate = 3;
+  string accountId = 4;
+  string type = 5;
+  string status = 6;
+}
